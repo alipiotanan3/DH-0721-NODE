@@ -3,11 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const multer = require('multer');
+const storage = require('./config/file-upload');
+
+const upload = multer({ storage: storage });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var petsRouter = require('./routes/pets');
 var servicosRouter = require('./routes/servicos');
+var contatoRouter = require('./routes/contato');
 
 var app = express();
 
@@ -21,10 +26,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(upload.single('imagem'));
+
 app.use('/', indexRouter);
 app.use('/users/', usersRouter);
 app.use('/pets/', petsRouter);
 app.use('/servicos/', servicosRouter);
+app.use('/contato/', contatoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

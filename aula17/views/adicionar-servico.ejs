@@ -1,0 +1,31 @@
+<%- include('./partials/head') %>
+<%- include('./partials/header') %>
+<main>
+  <section class="section-padrao">
+    <div class="container">
+      <h1>Serviço</h1>
+
+      <div class="align-row">
+        <form method="POST" enctype="multipart/form-data" action="/servicos/salvar">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" required>
+
+          <label for="descricao">Descrição</label>
+          <input type="text" id="descricao" name="descricao" required>
+
+          <label for="imagem">Imagem</label>
+          <input type="file" id="imagem" name="imagem" required>
+
+          <label for="valor">Valor</label>
+          <input type="text" id="valor" name="valor" required>
+
+          <button type="submit" class="btn btn-primary">enviar</button>
+        </form>
+        <% if (typeof adicionado !== "undefined"){ %>
+          <div>Serviço armazenado com sucesso</div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('./partials/footer') %> 
